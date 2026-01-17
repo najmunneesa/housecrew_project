@@ -1,0 +1,158 @@
+{% extends "user_app/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container my-5">
+    <h1 class="fw-bold mb-2 text-primary">Plumbing Services</h1>
+    <h4 class="text-muted mb-4">BY THE CREW</h4>
+    <p>
+        Expert plumbing solutions crafted with precision, hygiene, and enduring quality—tailored for modern homes and sophisticated spaces.
+        From minor leaks to advanced installations, our trained professionals ensure your plumbing systems work flawlessly, safely, and efficiently.
+    </p>
+    
+    {% if user.profile.role != 'ADMIN' %}
+    <div class="mb-4">
+        <a class="btn btn-primary" href="{% url 'user_sub_services' %}">Click Here for Cleaning Services</a>
+    </div>
+    {% endif %}
+    <div class="row row-cols-1 g-4">
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/plumbing2.png' %}" class="img-fluid" alt="Residential Plumbing Excellence">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Residential Plumbing Excellence</h3>
+                            <ul>
+                                <li>Designer tap, faucet & mixer installation</li>
+                                <li>Invisible leak detection & precision repairs</li>
+                                <li>Premium bathroom & modular kitchen plumbing</li>
+                                <li>Shower panels, wash basins & luxury fittings</li>
+                                <li>WC installation, concealed cistern & upgrades</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/plumbing3.png' %}" class="img-fluid" alt="Advanced Drainage Solutions">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Advanced Drainage Solutions</h3>
+                            <ul>
+                                <li>High-pressure drain & pipeline cleaning</li>
+                                <li>Odour-free kitchen & bathroom drainage care</li>
+                                <li>Sewer line inspection & preventive maintenance</li>
+                                <li>Smooth water-flow correction solutions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/plumbing4.png' %}" class="img-fluid" alt="Smart Water Systems">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Smart Water Systems</h3>
+                            <ul>
+                                <li>Overhead tank & underground sump solutions</li>
+                                <li>Motor pump installation & automation support</li>
+                                <li>New water line routing & modernisation</li>
+                                <li>Pressure balancing for multi-floor homes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/plumbin5.png' %}" class="img-fluid" alt="Geyser & Heating Systems">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Geyser & Heating Systems</h3>
+                            <ul>
+                                <li>Instant & storage geyser installation</li>
+                                <li>Leakage, heating & thermostat repairs</li>
+                                <li>Solar water heater plumbing integration</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/plumbing6.png' %}" class="img-fluid" alt="Preventive Care & Repairs">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Preventive Care & Repairs</h3>
+                            <ul>
+                                <li>Emergency plumbing support</li>
+                                <li>Pipe replacement (PVC, CPVC, GI, Copper)</li>
+                                <li>Ageing plumbing system upgrades</li>
+                                <li>Annual premium maintenance plans</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/plumbing7.png' %}" class="img-fluid" alt="Commercial & Luxury Spaces">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Commercial & Luxury Spaces</h3>
+                            <ul>
+                                <li>Office & retail plumbing solutions</li>
+                                <li>Hotel, restaurant & café plumbing care</li>
+                                <li>Restroom maintenance for high-footfall areas</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-5">
+        <h3 class="text-primary">Why Clients Trust Our Plumbing Services</h3>
+        <ul>
+            <li>Background-verified professionals</li>
+            <li>Uniformed technicians with ID verification</li>
+            <li>Premium tools and branded materials</li>
+            <li>Clean worksite with protective measures</li>
+            <li>Transparent pricing—no hidden charges</li>
+            <li>Service warranty and post-service support</li>
+        </ul>
+    </div>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends "user_app/base.html" %}
+{% block content %}
+    <div class="row justify-content-center my-4">
+        <div class="mb-3">
+            <a class="btn btn-dark mt-3" href="{% url 'admin_dashboard' %}" style="margin-left:60px;">Back</a>
+        </div>
+        <div class="card col-md-6 mb-3 mt-3">
+            <h3 class="text-center mb-3 mt-3">Add category</h3>
+            <form method="POST" action="" class="">
+                {% csrf_token %}
+                {{ form.non_field_errors}}
+                <div class="form-control mb-3 mt-3">
+                    {{form.category.label_tag}}
+                    {{form.category}}
+                    <div class="text-danger mt-1">
+                    {{ form.location.errors }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">add</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

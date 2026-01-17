@@ -1,0 +1,36 @@
+<div class="d-flex gap-2 mb-4">
+    <a class="btn btn-outline-primary {% if request.resolver_match.url_name == 'company_profile' %}active{% endif %}"
+       href="{% url 'company_profile' %}">
+        Company Profile
+    </a>
+
+    <a class="btn btn-outline-primary {% if request.resolver_match.url_name == 'authorized_person' %}active{% endif %}"
+       href="{% url 'authorized_person' %}">
+        Authorized Person
+    </a>
+
+    <a class="btn btn-outline-primary {% if request.resolver_match.url_name == 'legal_info' %}active{% endif %}"
+       href="{% url 'legal_info' %}">
+        Legal Information
+    </a>
+
+    <a class="btn btn-outline-primary {% if request.resolver_match.url_name == 'work_profile' %}active{% endif %}"
+       href="{% url 'work_profile' %}">
+        Work Profile
+    </a>
+
+    <a class="btn btn-outline-primary {% if request.resolver_match.url_name == 'company_declaration' %}active{% endif %}"
+       href="{% url 'company_declaration' %}">
+        Declaration
+    </a>
+
+    <a class="btn btn-outline-primary {% if request.resolver_match.url_name == 'insurance_info' %}active{% endif %}"
+       href="{% url 'insurance_details' %}">
+        Insurance
+    </a>
+
+    <a class="btn btn-outline-primary {% if request.resolver_match.url_name == 'chief_details' %}active{% endif %}"
+       href="{% url 'chief_details' %}">
+        Chief Technician
+    </a>
+</div>

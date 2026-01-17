@@ -1,0 +1,56 @@
+{% extends "user_app/base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Service Requests</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Service</th>
+            <th>Booked At</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% if bookings %}
+        {% for booking in bookings %}
+        <tr>
+            <td>{{ booking.user.username }}</td>
+            <td>{{ booking.service.name_of_service }}</td>
+            <td>{{ booking.booked_at|date:"d M Y H:i" }}</td>
+            <td>
+                <span class="badge bg-warning">Pending</span>
+            </td>
+            <td>
+                <form method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button name="action" value="accept" action="{% url 'service_allocated' %}"
+                            class="btn btn-success btn-sm">
+                        Accept
+                    </button>
+                    <button name="action" value="decline" action="{% url 'service_done' user %}"
+                            class="btn btn-danger btn-sm">
+                        Decline
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No pending service requests</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr><td colspan="5" class="text-center">No requests</td></tr>
+
+
+        {% endif %}
+
+    </tbody>
+</table>
+
+</div>
+{% endblock content %}

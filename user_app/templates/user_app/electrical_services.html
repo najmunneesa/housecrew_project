@@ -1,0 +1,134 @@
+{% extends "user_app/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container my-5">
+    <h1 class="fw-bold mb-2 text-primary">Electrical Services</h1>
+    <h4 class="text-muted mb-4">BY THE CREW</h4>
+    <p>
+        Expert electrical solutions delivered with precision, safety, and lasting performance—designed for modern homes and sophisticated spaces.
+        <br>Services include: Electrical Repairs, Lighting Installation, Wiring & Rewiring, Safety Systems, Power Backup, Emergency Support
+    </p>
+    {% if user.profile.role != 'ADMIN' %}
+    <div class="mb-4">
+        <a class="btn btn-primary" href="{% url 'user_sub_services' %}">Click Here for Cleaning Services</a>
+    </div>
+    {% endif %}
+    <div class="row row-cols-1 g-4 mt-4">
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/elctric4.png' %}" class="img-fluid" alt="Residential Electrical Excellence">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Residential Electrical Excellence</h3>
+                            <ul>
+                                <li>New wiring, rewiring & electrical upgrades</li>
+                                <li>Switches, sockets & modular plate installation</li>
+                                <li>Fan, light & chandelier installation</li>
+                                <li>Inverter, UPS & power backup connections</li>
+                                <li>Doorbell, exhaust fan & minor electrical fittings</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/electric2.png' %}" class="img-fluid" alt="Lighting & Ambience Solutions">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Lighting & Ambience Solutions</h3>
+                            <ul>
+                                <li>LED light & panel installation</li>
+                                <li>Decorative, accent & architectural lighting</li>
+                                <li>False ceiling & cove lighting setup</li>
+                                <li>Outdoor, balcony & garden lighting</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/electric3.png' %}" class="img-fluid" alt="Power & Safety Systems">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Power & Safety Systems</h3>
+                            <ul>
+                                <li>MCB, RCCB & distribution board installation</li>
+                                <li>Earthing & surge protection solutions</li>
+                                <li>Short circuit & power fluctuation issue repair</li>
+                                <li>Electrical load balancing & safety inspection</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/electric.png' %}" class="img-fluid" alt="Repairs & Maintenance">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Repairs & Maintenance</h3>
+                            <ul>
+                                <li>Electrical fault diagnosis & repair</li>
+                                <li>Switchboard & wiring repairs</li>
+                                <li>Loose connection & power failure fixes</li>
+                                <li>Preventive electrical maintenance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/electric1.png' %}" class="img-fluid" alt="Commercial Electrical Services">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Commercial Electrical Services</h3>
+                            <ul>
+                                <li>Office, retail & showroom electrical setup</li>
+                                <li>Commercial lighting & power distribution</li>
+                                <li>Electrical maintenance for high-usage spaces</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-5">
+        <h3 class="text-primary">Why Choose Our Electrical Services</h3>
+        <ul>
+            <li>Certified & uniformed electricians</li>
+            <li>Premium-grade tools & branded components</li>
+            <li>Safety-first execution with clean workmanship</li>
+            <li>Transparent pricing with service warranty</li>
+        </ul>
+    </div>
+</div>
+
+{% endblock content %}

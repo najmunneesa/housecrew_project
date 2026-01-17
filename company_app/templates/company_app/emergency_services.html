@@ -1,0 +1,17 @@
+{% extends "user_app/base.html" %}
+{% block  %}
+<div class="container">
+    {% for service in services %}
+  <div class="card">
+    <h5>{{ service.name_of_service }}</h5>
+
+    <a href="{% url 'bookservices' service.id %}?emergency=1"
+       class="btn btn-danger">
+       Book Emergency
+    </a>
+  </div>
+{% endfor %}
+
+</div>
+{% endblock  %}
+Booking.objects.order_by('-is_emergency', '-booked_at')

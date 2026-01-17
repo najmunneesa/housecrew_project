@@ -1,0 +1,31 @@
+{% extends "user_app/base.html" %}
+{% block content %}
+<div class="container mx-auto m-5">
+<h1 class="fw-bold text-center mb-3 mt-3">Register Company</h1>
+<div class="d-flex mx-auto mt-5">
+{% include "company_app/partials/registration.html" %}
+</div>
+<div class="text">
+    <h3 class="m-3">Company Registration Instructions</h3>
+    <p class="mb-3">Complete your registration in a few simple steps. Please read carefully:</p>
+    <ul style="list-style:number;">
+        <li>Prepare Your Documents</li>
+        <p>- Make sure all required documents are ready and legible.</p>
+        <p>- Having neat and complete documents will make your verification fast and smooth.</p>
+    
+    <li>Submit Your Registration Request</li>
+        <p>- Fill out the registration form and submit your details.</p>
+        <p>- This is just a request — our team will review your documents.</p>
+    
+    <li>Verification Process</li>
+        <p>- After submission, our team will verify your documents carefully.</p>
+        <p>- If everything is complete and correct, we will let you know to continue the registration.</p>
+    
+
+    <li>Temporary Login</li>
+        <p>- Upon form submission, you will receive a temporary username and password.</p>
+        <p>- Important: This login information will be shown only once, so make sure to save it securely.</p>
+        </ul>
+</div>
+</div>
+{% endblock content %}

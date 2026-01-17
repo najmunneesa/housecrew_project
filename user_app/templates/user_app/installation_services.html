@@ -1,0 +1,180 @@
+{% extends "user_app/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container my-5">
+    <h1 class="fw-bold mb-2 text-primary">Installation Services</h1>
+    <h4 class="text-muted mb-4">BY THE CREW</h4>
+    <p>
+        Expert installation solutions crafted for modern homes—where precision, safety, and long-term reliability matter most. Every installation is carried out by certified professionals using premium tools, compliant materials, and meticulous workmanship.
+        From essential home fixtures to advanced smart systems and EV infrastructure, we deliver flawless installations with a clean finish and complete peace of mind.
+    </p>
+    
+    {% if user.profile.role != 'ADMIN' %}
+    <div class="mb-4">
+        <a class="btn btn-primary" href="{% url 'user_sub_services' %}">Click Here for Cleaning Services</a>
+    </div>
+    {% endif %}
+    <div class="row row-cols-1 g-4 mt-4">
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/elct_inst.png' %}" class="img-fluid" alt="Electrical Installations">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Electrical Installations</h3>
+                            <ul>
+                                <li>Designer lights, chandeliers & decorative fixtures</li>
+                                <li>Ceiling, wall & exhaust fans</li>
+                                <li>Switchboards, sockets & smart controls</li>
+                                <li>Inverters, stabilizers & dedicated power lines</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/plumb_inst.png' %}" class="img-fluid" alt="Plumbing Installations">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Plumbing Installations</h3>
+                            <ul>
+                                <li>Taps, mixers, showers & health faucets</li>
+                                <li>Wash basins, vanities & kitchen sinks</li>
+                                <li>WC units, flush systems & bidets</li>
+                                <li>Water purifiers, motors & storage tanks</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/app_intall.png' %}" class="img-fluid" alt="Appliance Installations">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Appliance Installations</h3>
+                            <ul>
+                                <li>Air conditioners (split & window)</li>
+                                <li>Washing machines & dishwashers</li>
+                                <li>Refrigerators, chimneys & built-in appliances</li>
+                                <li>Geysers, ovens & microwaves</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/wallmount.png' %}" class="img-fluid" alt="Wall Mounting & Interior Fittings">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Wall Mounting & Interior Fittings</h3>
+                            <ul>
+                                <li>TV wall mounting & repositioning</li>
+                                <li>Shelves, cabinets & storage solutions</li>
+                                <li>Curtains, blinds, mirrors & décor fittings</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/modular_inst.png' %}" class="img-fluid" alt="Carpentry & Modular Installations">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Carpentry & Modular Installations</h3>
+                            <ul>
+                                <li>Modular kitchens & wardrobes</li>
+                                <li>Cabinet installations & adjustments</li>
+                                <li>Door locks, handles & soft-close systems</li>
+                                <li>Furniture assembly & setup</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/smart_home1.png' %}" class="img-fluid" alt="Smart Home & Utility Installations">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Smart Home & Utility Installations</h3>
+                            <ul>
+                                <li>Wi-Fi routers & network optimization</li>
+                                <li>CCTV cameras & video doorbells</li>
+                                <li>Smart locks, intercoms & automation devices</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/ev_install1.png' %}" class="img-fluid" alt="EV Charging Installation">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">EV Charging Installation</h3>
+                            <ul>
+                                <li>Home EV charger installation (AC systems)</li>
+                                <li>Wall-mounted & pedestal charger setup</li>
+                                <li>Electrical load assessment & dedicated line</li>
+                                <li>Proper earthing, MCB/RCCB & surge protection</li>
+                                <li>Testing, commissioning & user guidance</li>
+                                <li>Suitable for independent homes, villas, & private garages</li>
+                                <li>Compatible with electric cars & two-wheelers (3.3 kW / 7.4 kW)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-5">
+        <h3 class="text-primary">Why Choose Us</h3>
+        <ul>
+            <li>Certified, background-verified professionals</li>
+            <li>EV-trained electrical specialists</li>
+            <li>Premium tools and branded safety components</li>
+            <li>Clean, damage-free execution</li>
+            <li>Transparent pricing with service warranty</li>
+            <li>Reliable after-installation assistance</li>
+        </ul>
+    </div>
+</div>
+
+{% endblock content %}

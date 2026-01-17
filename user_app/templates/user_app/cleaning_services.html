@@ -1,0 +1,152 @@
+{% extends "user_app/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container my-5">
+    <h1 class="fw-bold mb-2 text-primary">Cleaning Services</h1>
+    <h4 class="text-muted mb-4">BY THE CREW</h4>
+    <p>
+        Experience exceptional cleanliness and refined care with our professionally curated cleaning services. We deliver immaculate spaces through skilled professionals, advanced equipment, and meticulous attention to detail—designed for homes and businesses that value perfection.
+    </p>
+    
+    {% if user.profile.role != 'ADMIN' %}
+    <div class="mb-4">
+        <a class="btn btn-primary" href="{% url 'user_sub_services' %}">Click Here for Cleaning Services</a>
+    </div>
+    {% endif %}
+    
+    <div class="row row-cols-1 g-4">
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/cleaning1.png' %}" class="img-fluid" alt="Residential Cleaning">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Residential Cleaning</h3>
+                            <ul>
+                                <li>Signature Deep Cleaning to restore freshness</li>
+                                <li>Detailed dusting and high-powered vacuuming</li>
+                                <li>Kitchen, bathroom, bedroom, and living area care</li>
+                                <li>Window and glass surface cleaning</li>
+                                <li>Floor mopping and deep floor care</li>
+                                <li>Precision cleaning of every corner for a flawless finish</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/reg_clean.png' %}" class="img-fluid" alt="Regular Home Care">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Regular Home Care (Hourly Service)</h3>
+                            <ul>
+                                <li>Surface dusting and light detailing</li>
+                                <li>Floor sweeping and mopping</li>
+                                <li>Flexible hourly-based service tailored to your needs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/home6.png' %}" class="img-fluid" alt="Outdoor & Utility Cleaning">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Outdoor & Utility Cleaning</h3>
+                            <ul>
+                                <li>Water tank cleaning for safe and hygienic storage</li>
+                                <li>Terrace cleaning for refreshed outdoor spaces</li>
+                                <li>Garden and surrounding area cleaning</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/cleaning4.png' %}" class="img-fluid" alt="Commercial Cleaning">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Commercial Cleaning</h3>
+                            <ul>
+                                <li>Corporate office cleaning</li>
+                                <li>Warehouse and industrial cleaning</li>
+                                <li>School and college cleaning services</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/fabric1.png' %}" class="img-fluid" alt="Fabric & Surface Care">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Specialized Fabric & Surface Care</h3>
+                            <ul>
+                                <li>Sofa and upholstery cleaning</li>
+                                <li>Carpet deep cleaning</li>
+                                <li>Mattress cleaning and deodorization</li>
+                                <li>Curtain cleaning</li>
+                                <li>Chair and cushion cleaning</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/post_constrction3.png' %}" class="img-fluid" alt="Post-Construction Cleaning">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Post-Construction Cleaning</h3>
+                            <ul>
+                                <li>Residential post-construction cleaning</li>
+                                <li>Commercial post-construction cleaning</li>
+                                <li>Removal of construction dust, debris, and residue</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-5">
+        <h3 class="text-primary">Sanitization Guarantee</h3>
+        <p>
+            Every cleaning service concludes with professional sanitization, ensuring a hygienic, safe, and germ-free environment for complete peace of mind.
+        </p>
+    </div>
+</div>
+
+{% endblock content %}

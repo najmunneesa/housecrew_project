@@ -1,0 +1,51 @@
+{% extends "user_app/base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+
+            <div class="card shadow-sm p-4">
+                <h4 class="text-center mb-4 fw-bold">User Login</h4>
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text"
+                               name="username"
+                               class="form-control"
+                               placeholder="Enter username"
+                               required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password"
+                               name="password"
+                               class="form-control"
+                               placeholder="Enter password"
+                               required>
+                    </div>
+                    <button type="submit" class="btn btn-dark w-100">
+                        Login
+                    </button>
+                </form>
+
+                <p class="text-center mt-3 mb-0">
+                    {% if not user.is_authenticated %}
+                    Don’t have an account?
+                    <a href="{% url 'user_registration' %}" class="text-decoration-none">
+                        Register
+                    </a>
+                    {% endif %}
+                </p>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

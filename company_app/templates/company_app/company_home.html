@@ -1,0 +1,48 @@
+{% extends "user_app/base.html" %}
+{% block content %}
+<div class="container">
+    <div class="row p-4 gap-4">
+        <div class="col-md-6">
+            <h3 class="text-bold text-primary">JOIN OUR CREW</h3>
+            <h6>Grow your business, reach more customers, and manage your services effortlessly.</h6>
+            <ul style="list-style:number">
+                <h4 class="fw-bold text-primary">What You Can Do</h4>
+                <li>Create your profile</li>
+                <li>showcase your services, expertise, and credentials</li>
+                <li>List your services - cleaning, plumbing, electrical, repair, installation, relocation, and more</li>
+                <li>Manage bookings - accept, reject, or reschedule customer requests easily</li>
+            </ul>
+            <p class="text-bold">To ensure a reliable and trustworthy marketplace, all companies must:
+Be verified and approved by the admin
+Maintain high service quality and professionalism
+Respond promptly to customer requests
+Provide accurate service descriptions and pricing
+Follow all local laws and safety regulations
+            </p>
+            <h4 class="text-bold text-primary">Why Join Us?</h4>
+            <p>Expand your customer base without heavy marketing costs
+Simplify service management with integrated booking and communication tools
+Build a reputation through reviews and ratings
+            </p>
+        </div>
+        {% if not user.is_authenticated %}
+       <div class="col-md-4 mx-auto">
+            <div class="card shadow-sm p-4">
+                <h4 class="mb-3">Company Access</h4>
+                <div class="mb-3 mt-4">
+                    <a href="{% url 'user_login' %}" class="btn btn-dark w-100 mb-2">
+                    Login
+                    </a>
+                </div>
+                <hr>
+                <div class="mb-3 mt-4">
+                    <a href="{% url 'register_company' %}" class="btn btn-outline-dark w-100">
+                    Register Company Here
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>    
+</div>
+{% endblock content %}

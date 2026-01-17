@@ -1,0 +1,79 @@
+{% extends "user_app/base.html" %}
+{% block content %}
+{% include "company_app/partials/registration.html" %}
+<div class="container">
+    <div class="col-md-6 mx-auto">
+        <div class="card shadow-sm p-4">
+
+            <h3 class="text-center mb-4">Company Declaration</h3>
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger text-center">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                {% for field in form %}
+                    {% if field.name == "c_p_verification" %}
+                        <div class="mb-3">
+                            {{ field.label_tag }}
+
+                            {% for radio in field %}
+                                <div class="form-check">
+                                    {{ radio.tag }}
+                                    <label class="form-check-label" for="{{ radio.id_for_label }}">
+                                        {{ radio.choice_label }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+
+                            {% if field.help_text %}
+                                <div class="form-text">
+                                    {{ field.help_text }}
+                                </div>
+                            {% endif %}
+
+                            {% for error in field.errors %}
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="mb-3">
+                            {{ field.label_tag }}
+                            {{ field }}
+
+                            {% if field.help_text %}
+                                <div class="form-text">
+                                    {{ field.help_text }}
+                                </div>
+                            {% endif %}
+
+                            {% for error in field.errors %}
+                                <div class="text-danger small">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-primary px-4">
+                        NEXT
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+</div>
+{% endblock content %}

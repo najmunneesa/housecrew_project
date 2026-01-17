@@ -1,0 +1,142 @@
+{% extends "user_app/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container my-5">
+    <h1 class="fw-bold mb-3 text-primary">Additional Home Care Services</h1>
+    <h4 class="text-muted mb-4">BY THE CREW</h4>
+    
+    {% if user.profile.role != 'ADMIN' %}
+    <div class="mb-4">
+        <a class="btn btn-primary" href="{% url 'user_sub_services' %}">Click Here for Cleaning Services</a>
+    </div>
+    {% endif %}
+    <div class="row row-cols-1 g-4">
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/pest_control.png' %}" class="img-fluid" alt="Pest Control">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Pest Control Services</h3>
+                            <p>
+                                Discreet, science-backed pest management solutions that safeguard your home and family.
+                                <ul>
+                                    <li>General pest control: cockroaches, ants, spiders, insects</li>
+                                    <li>Termite control (pre/post-construction)</li>
+                                    <li>Rodent control and proofing</li>
+                                    <li>Mosquito control indoor/outdoor</li>
+                                    <li>Eco-friendly, safe treatments</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/garden.png' %}" class="img-fluid" alt="Gardening">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Gardening & Green Space Setup</h3>
+                            <p>
+                                Thoughtfully designed garden solutions for outdoor spaces.
+                                <ul>
+                                    <li>Garden planning & layout consultation</li>
+                                    <li>Lawn development & turf installation</li>
+                                    <li>Plant selection, soil conditioning, and potting</li>
+                                    <li>Drip irrigation & automated watering</li>
+                                    <li>Balcony, terrace, vertical garden setups</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/handyman.png' %}" class="img-fluid" alt="Handyman">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Handyman On-Demand</h3>
+                            <p>
+                                Reliable assistance for everyday household fixes.
+                                <ul>
+                                    <li>Drilling, mounting, wall fixtures</li>
+                                    <li>Door, hinge, lock, handle adjustments</li>
+                                    <li>Curtain rods, mirrors, shelves</li>
+                                    <li>Minor electrical & plumbing repairs</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/emergency.png' %}" class="img-fluid" alt="Emergency Repair">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Emergency Repair Services</h3>
+                            <p>
+                                Priority-based repair support for urgent situations.
+                                <ul>
+                                    <li>Electrical faults & power failures</li>
+                                    <li>Plumbing leaks & pipe bursts</li>
+                                    <li>Blocked drains & water overflow</li>
+                                    <li>Geyser & appliance breakdowns</li>
+                                    <li>Safety inspections & temporary fixes</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/amc.png' %}" class="img-fluid" alt="AMC">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Annual Maintenance Contract (AMC)</h3>
+                            <p>
+                                Preventive care plan for your home all year.
+                                <ul>
+                                    <li>Scheduled electrical & plumbing inspections</li>
+                                    <li>Preventive maintenance & minor adjustments</li>
+                                    <li>Priority booking for all services</li>
+                                    <li>Preferential pricing on additional work</li>
+                                    <li>Digital service history & reminders</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock content %}

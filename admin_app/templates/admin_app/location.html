@@ -1,0 +1,40 @@
+{% extends "user_app/base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <div class="mb-3">
+        <a class="btn btn-dark mt-3" href="{% url 'admin_dashboard' %}" style="margin-left:0px;">Back</a>
+    </div>
+    <h3>Location</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for location in location  %}
+            <tr>
+                
+                <td>{{location.location}}</td>
+                <td>
+                    <form method='POST' action="{% url 'delete_location'  location.pk %}" class="d-inline">
+                        {% csrf_token %}
+                            <button class="btn btn-danger btn-sm"
+                            onclick="return confirm('are you sure want to delete this category?');">delete</button>
+                        </form>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+    </table>
+    <div>
+        <a class="btn btn-warning" href="{% url 'add_location' %}">
+            addlocation
+        </a>
+    </div>
+</div>
+
+{% endblock content %}

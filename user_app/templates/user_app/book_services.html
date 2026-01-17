@@ -1,0 +1,29 @@
+{% extends "user_app/base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Book Service: {{ service.name_of_service }}</h2>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">{{ service.name_of_service }}</h5>
+            <p class="card-text text-muted mb-1">{{ service.description }}</p>
+            {% if service.category  %}
+            <p class="mb-1"><strong>Category:</strong> {{ service.category.category }}</p>
+            {% endif %}
+            {% if service.crew %}
+            <p class="mb-1"><strong>Crew:</strong> {{ service.crew.h_services }}</p>
+            {% endif %}
+            <p class="fw-bold">Base Charge: ₹{{ service.base_charge }}</p>
+            
+        </div>
+
+        <form method="POST" action="{% url 'dashboard' %}">
+            {% csrf_token %}
+            <div class="card-footer bg-transparent border-top">
+                <button type="submit" class="btn btn-primary">confirm Booking</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

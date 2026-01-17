@@ -1,0 +1,192 @@
+{% extends "user_app/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="">
+<div id="carouselExampleAutoplaying" class="carousel slide mx-auto" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    {% for img in carousel_images %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <img src="{% static img %}" class="carousel-img" alt="Slide {{ forloop.counter }}">
+        
+        {% if not user.is_authenticated %}
+          <div class="carousel-caption text-end top-0">
+            <h2>Discover Our Services</h2>
+            <p>Browse services. Book instantly. Get expert help</p>
+            <a class="btn btn-primary" href="{% url 'house crew' %}">Click Here</a>
+          </div>
+          <div class="carousel-caption text-end top-50">
+            <h2>Become Part of Our Crew</h2>
+            <p>Work with us. Grow your skills. Get more jobs.</p>
+            <a class="btn btn-primary" href="{% url 'company_home' %}">Click Here</a>
+          </div>
+        {% else %}
+          <div class="carousel-caption fw-bold text-end top-0">
+            <h3>Welcome</h3>
+            <h4>{{ user.username }}</h4>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<!--Content -->
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-8">
+      <h1 class="text-primary fw-bold">HouseCrew Services</h1>
+      <h6 class="text-primary fw-semibold">Connecting homes with trusted professionals</h6>
+      <p>The Home Services Marketplace connects homeowners with verified professionals for all home needs — cleaning, plumbing, electrical work, appliance repair, installations, maintenance, and relocation services.</p>
+      
+      <h3 class="text-primary">What you can do</h3>
+      <ul>
+        <li>Browse & compare service providers by category, pricing, ratings, and availability</li>
+        <li>Book services easily based on your requirements</li>
+        <li>Share feedback & ratings after service completion</li>
+      </ul>
+
+      <h3 class="text-primary">For Service Providers</h3>
+      <ul>
+        <li>Create professional profiles</li>
+        <li>List and manage services</li>
+        <li>Handle bookings efficiently</li>
+      </ul>
+
+      <h2 class="text-primary fw-bold">Why Choose Us?</h2>
+      <p>We simplify the process of finding dependable home services by offering transparency, convenience, and trust — benefiting both homeowners and service providers.</p>
+      <ul style="list-style:none;">
+        <li><h4>Verified, uniformed professionals</h4></li>
+        <li><h4>Premium tools & branded materials</h4></li>
+        <li><h4>Clean worksite & damage-free execution</h4></li>
+        <li><h4>Transparent pricing & service warranty</h4></li>
+      </ul>
+    </div>
+
+    {% if user.profile.role != 'COMPANY' and user.profile.role != 'ADMIN' %}
+    <div class="col-md-4">
+      <!-- get quote -->
+      <div class="glass-card shadow-sm mb-4">
+        <select class="form-select mb-3" required>
+          <option selected disabled>Choose your location</option>
+          {% for location in locations %}
+          <option>{{ location.location }}</option>
+          {% endfor %}
+        </select>
+        <select class="form-select mb-3" required>
+          <option selected disabled>Services you need</option>
+          {% for service in services %}
+          <option>{{ service.h_services }}</option>
+          {% endfor %}
+        </select>
+        <a class="btn btn-warning w-100" href="{% url 'get_quote' %}">Get Quote</a>
+      </div>
+
+      <div class="glass-card shadow-sm mb-4">
+        <div class="d-grid gap-3 p-4 icon-grid">
+          <a href="{% url 'cleaning' %}"><img src="{% static 'user_app/images/cleaning.png' %}" style="max-width:70px; max-height:70px;"></a>
+          <a href="{% url 'plumbing' %}"><img src="{% static 'user_app/images/plumbing.png' %}" style="max-width:70px; max-height:70px;"></a>
+          <a href="{% url 'electrical' %}"><img src="{% static 'user_app/images/electrical.png' %}" style="max-width:70px; max-height:70px;"></a>
+          <a href="{% url 'appliance repair' %}"><img src="{% static 'user_app/images/appliance_repair.png' %}" style="max-width:70px; max-height:70px;"></a>
+          <a href="{% url 'installation' %}"><img src="{% static 'user_app/images/installation.png' %}" style="max-width:70px; max-height:70px;"></a>
+          <a href="{% url 'relocation' %}"><img src="{% static 'user_app/images/relocate.png' %}" style="max-width:70px; max-height:70px;"></a>
+          <a href="{% url 'additional' %}"><img src="{% static 'user_app/images/default.png' %}" style="max-width:70px; max-height:70px;"></a>
+        </div>
+      </div>
+
+      <!--call back-->
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h5 class="fw-bold text-primary mb-3">Request a Call Back</h5>
+          <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Name</label>
+              <input type="text" name="name" class="form-control" placeholder="Enter your name" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Contact Number</label>
+              <input type="text" name="contact" class="form-control" placeholder="Enter your phone number" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Request Call Back</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Services Modal -->
+<div class="modal fade" id="servicesModal" tabindex="-1" aria-labelledby="servicesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title w-100 text-center" id="servicesModalLabel">Service Categories</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {% for category, services in category_services.items %}
+          <div class="mb-3">
+            <h5>{{ category.category }}</h5>
+            <ul class="list-group">
+              {% for service in services %}
+                {% if service.id %}
+                  <li class="list-group-item">
+                    <a class="btn" href="{% url 'user_sub_services' %}">
+                      {{ service.h_services }}
+                    </a>
+                  </li>
+                {% endif %}
+              {% empty %}
+                <li class="list-group-item">No services available.</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Companies Modal -->
+<div class="modal fade" id="companiesModal" tabindex="-1" aria-labelledby="companiesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="companiesModalLabel">Companies List</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
+        <ul style="list-style:none; padding-left:0;">
+          {% for company in companies %}
+            <li class="mb-2">
+              <a class="btn btn-outline-primary w-100" href="{% url 'verify_company' company.id %}">
+                {{ company.c_name }}
+              </a>
+            </li>
+          {% empty %}
+            <li>No companies found.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+{% endblock content %}
+
+
+
+
+

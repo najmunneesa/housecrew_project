@@ -1,0 +1,40 @@
+{% extends "user_app/base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+        <div class="mb-3">
+            <a class="btn btn-dark mt-3" href="{% url 'admin_dashboard' %}" style="margin-left:60px;">Back</a>
+        </div>
+    <div class="card col-md-6 mx-auto p-4 shadow-sm">
+        <h3 class="text-center mb-4">Add HouseCrew Service</h3>
+        <form method="POST" action="{% url 'add_service' %}">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                {{ form.h_services.label_tag }}
+                {{ form.h_services }}
+                {% if form.h_services.errors %}
+                    <div class="text-danger">{{ form.h_services.errors.0 }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="mb-3">
+                {{ form.s_category.label_tag }}
+                {{ form.s_category }}
+                {% if form.s_category.errors %}
+                    <div class="text-danger">{{ form.s_category.errors.0 }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="form-check mb-3">
+                <input type="checkbox" name="{{ form.is_emergency.name }}" id="emergencyCheckbox"
+                class="form-check-input" {% if form.is_emergency.value %}checked{% endif %}>
+                <label class="form-check-label" for="emergencyCheckbox">{{ form.is_emergency.label_tag }}</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,84 @@
+{% extends "user_app/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4 fw-bold text-primary">House Crew</h1>
+    <div class="row p-4 gap-4">
+        <div class="col-md-6 mb-3">
+            <div class="row">
+                {% for sub in sub_services %}
+                <div class="col-md-6 col-sm-6 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title fw-semibold">{{ sub.name_of_service }}</h5>
+                            <p class="card-text mb-1">
+                                {% if sub.crew %}
+                                <strong>Service:</strong> {{ sub.crew.h_services }}<br>
+                                <strong>Category:</strong> {{ sub.crew.s_category.category }}
+                                {% endif %}
+                            </p>
+                            <p class="fw-bold text-dark mb-0">₹{{ sub.base_charge }}</p>
+                        </div>
+                        <form method="POST" action="{% url 'bookservices' sub.id %}">
+                            {% csrf_token %}
+                            <div class="card-footer bg-transparent border-0 text-end">
+                                <button type="submit" class="btn btn-outline-dark btn-sm">Book Now
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-muted">No sub-services found.</p>
+                {% endfor %}
+            </div>
+        </div>
+        <!--user_credential change-->
+        <div class="col-md-4 mx-auto">
+            <div class="container">
+                {% if user.is_authenticated %}
+                <div class="card shadow-sm p-1 mb-3 ">
+                    <a class="btn fw-bold transparent" href="{% url 'update_user_credentials' %}">Update Login Credentials</a>
+                </div>
+                {% else %}
+            </div>
+            <div class="card shadow-sm p-4 mt-3">
+                <h4 class="mb-3">User Access</h4>
+                <div class="mb-3 mt-4">
+                    <a href="{% url 'user_login' %}" class="btn btn-dark w-100 mb-2">Login</a>
+                </div>
+                <hr>
+                <div class="mb-3 mt-4">
+                    <a href="{% url 'user_registration' %}" class="btn btn-outline-dark w-100">Register</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <!--categories-->
+        <div class="container">
+            {% if categories %}
+                <div class="row">
+                    {% for category in categories %}
+                        <div class="col-sm-6 mb-3">
+                            <a href="{% url 'category_services' category.slug %}"
+                               class="btn  w-100 py-3 shadow-sm text-center">
+                                <img src="{% static category.image_url %}"
+                                     class="img-fluid mb-2"
+                                     style="max-height: 80px;"
+                                     alt="{{ category.category }}">
+
+                                <div class="fw-semibold">
+                                    {{ category.category }}
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-muted">No categories available</p>
+            {% endif %}
+        </div>
+</div>
+
+
+{% endblock content %}

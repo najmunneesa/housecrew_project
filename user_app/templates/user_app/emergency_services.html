@@ -1,0 +1,61 @@
+{% extends "user_app/base.html" %}
+{% block content %}
+<div class="container my-5">
+    <h3 class="fw-bold text-primary mb-4">Emergency Services</h3>
+    <div class="row">
+        <div class="col-md-8">
+            <h4 class="fw-bold text-primary mb-3">Emergency Services You Can Rely On</h4>
+            <p>
+                We understand that emergencies can happen anytime, and quick action is crucial.
+                That’s why we provide fast, reliable emergency services across a range of essential needs.
+            </p>
+            <p>
+                You can choose the service you require, and our team will reach you promptly to resolve the issue efficiently.
+            </p>
+
+            <h5 class="fw-bold text-primary mt-4">Services We Provide</h5>
+            <ul class="mb-3" style="list-style:none;">
+                <li class="mb-2">Plumbing - Burst pipes, leaks, clogs, and all urgent plumbing issues</li>
+                <li class="mb-2">Electrical - Power failures, short circuits, faulty wiring, and other electrical emergencies</li>
+                <li class="mb-2">Relocation - Quick assistance for urgent moving and shifting requirements</li>
+                <li class="mb-2">Appliance Repair - Immediate repair for ACs, refrigerators, washing machines, and other essential appliances</li>
+                <li class="mb-2">Maintenance & Repair - Any urgent household or office maintenance needs</li>
+            </ul>
+
+            <h5 class="fw-bold text-primary mt-4">How It Works</h5>
+            <ol class="mb-3">
+                <li class="mb-2">Select Your Service: Choose the emergency service you need.</li>
+                <li class="mb-2">Book Instantly: Fill in your details and submit your request.</li>
+                <li class="mb-2">Rapid Response: Our trained professionals will reach your location quickly to provide a solution.</li>
+            </ol>
+
+            <h5 class="fw-bold text-primary mt-4">Why Choose Our Emergency Services?</h5>
+            <ul class="mb-3" style="list-style:none;">
+                <li class="mb-2">24/7 availability for urgent requirements</li>
+                <li class="mb-2">Verified, skilled, and professional service personnel</li>
+                <li class="mb-2">Quick response and efficient resolution</li>
+                <li class="mb-2">Transparent service and pricing</li>
+            </ul>
+        </div>
+
+        <div class="col-md-4">
+            {% for service in services %}
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ service.name_of_service }}</h5>
+                    <p class="card-text"><strong>Category:</strong> {{ service.crew.s_category.category }}</p>
+                    <form method="post" action="{% url 'book_emergency_services' service.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="service_id" value="{{ service.id }}">
+                        <button type="submit" class="btn btn-danger w-100">Book Service</button>
+                    </form>
+                </div>
+            </div>
+            {% empty %}
+            <p>No emergency services available right now.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

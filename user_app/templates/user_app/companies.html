@@ -1,0 +1,100 @@
+{% extends "user_app/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+    <h1 class="mb-4 text-primary">Companies</h1>
+    <div class="col-md-8">
+        <div class="contents">
+            <h2 class="text-bold text-primary">Our Trusted Partner Companies</h2>
+            <p>We collaborate with a network of carefully evaluated service companies 
+                that share our commitment to quality, reliability, and customer satisfaction. 
+                Every company on our platform is selected through a structured review process 
+                to ensure they meet our standards for professionalism, expertise, and ethical service delivery.
+            </p>
+            <h6 class="text-primary">Our goal is simple: to connect customers with service providers they can trust, rely on, and feel confident inviting into their homes or workplaces.</h6>
+        </div>
+        <div class="contents">
+            <h2 class="text-bold text-primary">How We Select Our Partner Companies</h2>
+            <p>Each company goes through a detailed evaluation process before being onboarded. 
+                This includes verification of credentials, experience, 
+                service capabilities, and operational standards. Only companies that demonstrate 
+                consistent quality and a customer-first approach become part of our platform.
+            </p>
+        </div>
+        <div class="contents">
+            <h2 class="text-bold text-primary">Skilled, Trained & Verified Professionals</h2>
+            <p>Our partner companies employ qualified professionals who are trained in their respective 
+                service areas. Team members are skill-verified, background-checked, and equipped with the 
+                knowledge required to deliver services safely and efficiently.Continuous training ensures they 
+                stay updated with modern tools, techniques, and industry best practices.
+            </p>
+        </div>
+        <div class="contents">
+            <h2 class="text-bold text-primary">Commitment to Timely & Reliable Service</h2>
+            <p>Reliability is a core expectation. Our companies understand the importance of time and 
+                are committed to arriving as scheduled and completing work within agreed timelines. Clear 
+                communication and proactive updates help ensure a smooth and stress-free service experience.
+            </p>
+        </div>
+        <div class="contents">
+            <h2 class="text-bold text-primary">Safety, Compliance & Quality Assurance</h2>
+            <p>Safety is never compromised. Partner companies follow strict safety protocols, 
+                industry standards, and quality control measures to protect both customers and professionals.
+                 From proper equipment usage to safe work procedures, every service is carried out responsibly 
+                 and professionally.
+            </p>
+        </div>
+        <div class="contents">
+            <h2 class="text-bold text-primary">Professional Ethics & Transparency</h2>
+            <p>Our companies operate with integrity and honesty. Service details, pricing, and scope 
+                of work are communicated clearly in advance, ensuring complete transparency. Customers 
+                are kept informed at every stage, eliminating hidden costs and unexpected changes.
+            </p>
+        </div>
+        <div class="contents">
+            <h2 class="text-bold text-primary">Fair & Transparent Pricing Practices</h2>
+            <p>We believe trust is built through clarity. Our partner companies provide clear estimates, 
+                fair pricing, and value-driven services. Customers receive detailed explanations of services, 
+                allowing them to make informed decisions with confidence.
+            </p>
+        </div>
+        <div class="contents">
+            <h2 class="text-bold text-primary">Customer-Focused Support & Accountability</h2>
+            <p>Customer satisfaction is a shared priority. Our partner companies offer responsive support,
+                 clear communication, and prompt issue resolution. Feedback is taken seriously and used to 
+                 continuously improve service quality and accountability.
+
+            </p>
+        </div>
+        <div class="contents">
+            <h2 class="text-bold text-primary">Our Promise to Customers</h2>
+            <p>By working with trusted and verified companies, we ensure that every service request is 
+                handled with care, professionalism, and attention to detail. Our platform exists to create a 
+                dependable service ecosystem where customers can feel confident, safe, and satisfied with every 
+                interaction.
+            </p>
+        </div>
+    </div>
+
+    <div class="col-md-4 ms-auto">
+        <div class="">
+            <ul class="list-group ">
+            {% for company in companies %}
+            <li style="list-style : none;" class="mb-3 ">
+                <a href="#" class="list-group-item list-group-item-action">
+            {{ company.c_name }}
+                </a>
+            </li>
+            {% empty %}
+                <li class="list-group-item text-muted">
+            No companies found.
+                </li>
+            {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,49 @@
+{% extends "user_app/base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-start">
+        <a class="btn btn-dark mt-3" href="{% url 'service_categories' %}" style="margin-left:0px;">Back</a>
+    </div>
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-warning" href="{% url 'add_service' %}">add service</a>
+    </div>
+    <h2 class="text-center mb-3">HouseCrew Services</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Category</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for service in services %}
+            <tr>
+                <td>{{ service.h_services }}</td>
+                <td>{{ service.s_category.category }}</td>
+                <td>{{ service.is_emergency }}
+                <td><a class="btn" href="{% url 'update_services' service.pk %}">Update</a></td>
+                <td>
+                        <form method='POST' action="{% url 'delete_service'  service.id %}" class="d-inline">
+                        {% csrf_token %}
+                            <button class="btn btn-sm"
+                            onclick="return confirm('are you sure want to delete this category?');">delete</button>
+                        </form>
+                </td>
+
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No services found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-warning" href="{% url 'add_service' %}">add service</a>
+    </div>
+</div>
+
+{% endblock content %}

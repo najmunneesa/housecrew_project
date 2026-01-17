@@ -1,0 +1,50 @@
+{% extends "user_app/base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <div class="mb-3">
+            <a class="btn btn-dark mt-3" href="{% url 'sub_services' %}" style="margin-left:60px;">Back</a>
+    </div>
+    
+    <div class="card col-md-6 mx-auto p-4 shadow-sm">
+        <h3 class="text-center mb-4">Update HouseCrew Service</h3>
+        <form method="POST" action="{% url 'update_subservices' service.pk %}">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                {{ form.crew.label_tag }}
+                {{ form.crew }}
+                {% if form.crew.errors %}
+                    <div class="text-danger">{{ form.crew.errors.0 }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="mb-3">
+                {{ form.name_of_service.label_tag }}
+                {{ form.name_of_service }}
+                {% if form.name_of_service.errors %}
+                    <div class="text-danger">{{ form.name_of_service.errors.0 }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="mb-3">
+                {{ form.description.label_tag }}
+                {{ form.description }}
+                {% if form.description.errors %}
+                    <div class="text-danger">{{ form.description.errors.0 }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="mb-3">
+                {{ form.base_charge.label_tag }}
+                {{ form.base_charge }}
+                {% if form.base_charge.errors %}
+                    <div class="text-danger">{{ form.base_charge.errors.0 }}</div>
+                {% endif %}
+            </div>
+            
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

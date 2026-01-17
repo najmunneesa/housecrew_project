@@ -1,0 +1,223 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home services</title>
+    <style>
+        body{
+            
+        }
+        .navbar{
+            background-color: rgb(249, 249, 183);
+            
+        }
+        .navbar-nav .nav-item .nav-link .dropdown .dropdown-item{
+            color: rgb(56, 119, 204);
+            background-color: rgb(249, 249, 183);
+        }
+        .icon-grid{
+            grid-template-columns : repeat(3, 1fr);
+
+        }
+        .icon-hover{
+
+        }
+        .glass-card{
+            background:rgba(255, 255, 255, 0.18);
+            -webkit-backdrop-filter:blur(15px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            border-radius : 16px;
+        }
+        .glass-select{
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+
+    outline: none;
+    font-size: 15px;
+}
+.carousel-item {
+    background-color: rgba(0, 0, 0, 0.6); /* dark transparent */
+    padding: 20px 25px;
+    border-radius: 8px;
+}
+
+
+.glass-select option{
+    color: rgba(255, 255, 255, 0.7);
+}
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+legend {
+    display: none;
+}
+.selectable-row.selected {
+    background-color: #e9f2ff;
+}
+
+.row-number {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body style="background-color: rgb(248, 244, 199);">
+    <div class="top-banner" style="background-color:rgb(248, 244, 199);">
+        <img src="{% static 'user_app/images/logo2.png' %}"  alt="logo" class="img-logo d-block mx-auto img-fluid" style="max-width:270px;">
+    </div>
+    <div>
+        <nav class="navbar navbar-expand-lg shadow-sm">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bold" style="color:rgb(56, 119, 204);" href="{% url 'home' %}">HOUSE CREW</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
+                        </li>
+                        {% if not user.is_authenticated %}
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#servicesModal">
+                                    Services
+                                </button>
+                            </div>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                        <a class="nav-link" href="{% url 'company_list' %}" role="button">
+                            Companies
+                        </a>
+                        </li>
+                        {% endif %}
+                        {% if not user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}">about US</a>
+                        </li>
+                        {% endif %}
+                        {% if user.is_authenticated and user.profile.role == 'USER' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user_sub_services' %}">Services</a>
+                        </li>
+                        {% endif %}
+                        {% if user.is_authenticated and user.profile.role == 'ADMIN' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'monitor_services' %}">Service</a>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#companiesModal">
+                                    Company List
+                                </button>
+                            </div>
+                        </li>
+                        {% endif %}
+
+                        {% if user.is_authenticated and user.profile.role == 'COMPANY' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'service_booking_requests' %}">Service Requests</a>
+                        </li>
+                        {% endif %}
+
+
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            {% if user.profile.role == 'ADMIN' %}
+                                <a class="nav-link" href="{% url 'admin_dashboard' %}">Dashboard</a>
+                            {% elif user.profile.role == 'COMPANY' %}                           
+                                <li><a class="nav-link" href="{% url 'company_dashboard' %}">Dashboard</a></li>
+                                {% elif user.profile.role == 'USER' %}
+                                <li><a class="nav-link" href="{% url 'service_booking_requests' %}">Service Requests</a></li>
+                                
+                            {% else %}
+                                <a class="nav-link" href="{% url 'house crew' %}">Dashboard</a>
+                            {% endif %}
+                        </li>
+                        {% endif %}
+                        {% if user.is_authenticated and user.profile.role == 'USER' %}
+                        <li><a class="nav-link" href="{% url 'dashboard' %}">My Services</a></li>
+                                
+                        {% endif %}
+                    </ul>
+                </div>
+                <!--search-->
+                <form class="d-flex" role="search" method="get" action="{% url 'search' %}">
+                    <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search" required/>
+                    <button class="btn btn-outline-dark" type="submit">Search</button>
+                </form>
+            </div>
+            {% if user.is_authenticated %}
+            <li class="nav-item dropdown" style="list-style:none;">
+                <a class="btn" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="me-2">{{ user.username }}</span>
+                </a>
+                <ul class="dropdown-menu p-3" aria-labelledby="userDropdown">
+                    <li><strong>Username:</strong> {{ user.username }}</li>
+                    <li><strong>Role:</strong> {{ user.profile.role }}</li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            </li>
+
+            <form method="post" action="{% url 'logout' %}" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger me-3">
+            Logout
+            </button>
+            </form>
+            {% endif %}
+
+        </nav>
+    </div>
+    <div>
+    {% if user.is_authenticated and user.profile.role == 'USER' %}
+    <a class="btn btn-danger text-nowrap position-fixed end-0 me-3 mt-5" href="{% url 'emergency_services' %}" style="top: 56px;">
+    Emergency service
+    </a>
+    {% endif %}
+  </div>
+  
+    
+    {% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}  
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% block content %}
+    
+    {% endblock content %}
+    
+    <hr>
+<footer class="text-light mt-auto" style="background-color:rgb(248,244,199)">
+    <div class="container py-3 text-center small text-muted" >
+        <img src="{% static 'user_app/images/logo2.png' %}"  alt="logo" class="img-logo img-fluid" style="max-width:100px;">
+    ©  HouseCrew. All rights reserved.
+    </div>
+    <p class="mb-0 text-muted ">© 2025 House Crew</p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>    
+</body>
+</html>

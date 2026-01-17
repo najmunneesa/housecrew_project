@@ -1,0 +1,78 @@
+{% extends "user_app/base.html" %}
+{% block content %}
+<div class="container my-4">
+    <div class="card shadow-sm mb-4">
+        <div class="card-body text-center">
+            <h3 class="mb-1 text-primary">{{ company.user.username }}</h3>
+            <p class="text-muted mb-2">{{ company.c_name }}</p>
+
+            {% if company.approval_status == "APPROVED" %}
+                <span class="badge bg-success">Approved</span>
+            {% elif company.approval_status == "PENDING" %}
+                <span class="badge bg-warning text-dark">Pending Approval</span>
+            {% else %}
+                <span class="badge bg-danger">Rejected</span>
+            {% endif %}
+        </div>
+        {% if company.approval_status == "APPROVED" %}
+        <div class="d-flex justify-content-end mb-3">
+            <a href="{% url 'update_credentials' %}" class="btn btn-outline-primary">
+                Update Login Credentials
+            </a>
+        </div>
+
+    </div>
+
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-header fw-bold">
+                Your Service Categories
+            </div>
+            <div class="card-body">
+                {% if s_categories %}
+                    <ul class="list-group list-group-flush">
+                        {% for category in s_categories %}
+                            <li class="list-group-item">
+                                {{ category.category }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-muted text-center">
+                        No service categories selected.
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-header fw-bold">
+                Work Profiles
+            </div>
+            <div class="card-body">
+                {% for profile in work_profiles %}
+                    <div class="mb-3">
+                        <strong>Experience:</strong> {{ profile.c_year }}
+                        <ul class="mt-2">
+                            {% for service in profile.c_nature_service %}
+                                <li>{{ service.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% empty %}
+                    <p class="text-muted text-center">
+                        No work profiles found.
+                    </p>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-warning text-center">
+            Your company is not approved yet.  
+            Please wait for admin approval or resubmit your registration if rejected.
+        </div>
+    {% endif %}
+
+</div>
+
+{% endblock content %}

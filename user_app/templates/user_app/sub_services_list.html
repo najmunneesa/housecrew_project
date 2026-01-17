@@ -1,0 +1,39 @@
+{% extends "user_app/base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        {% for sub in sub_services %}
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold">{{ sub.name_of_service }}</h5>
+                        
+                        <p class="card-text text-muted small mb-1">
+                            {{ sub.description }}
+                        </p>
+
+                        <p class="card-text mb-1">
+                            <strong>Service:</strong> {{ sub.crew.h_services if sub.crew }}<br>
+                            <strong>Category:</strong> {{ sub.crew.s_category.category if sub.crew }}
+                        </p>
+
+                        <p class="fw-bold text-dark mb-0">₹{{ sub.base_charge }}</p>
+                    </div>
+
+                    <form method="POST" action="{% url 'bookservices' sub.id %}">
+                        {% csrf_token %}
+                        <div class="card-footer bg-transparent border-0 text-end">
+                            <button type="submit" class="btn btn-outline-dark btn-sm">
+                                Book Now
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-muted">No sub-services found.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

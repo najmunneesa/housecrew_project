@@ -1,0 +1,130 @@
+{% extends "user_app/base.html" %}
+{% block content %}
+<div class="container">
+    <div class="mb-3">
+            <a class="btn btn-dark mt-3" href="{% url 'company' %}" style="margin-left:0px;">Back</a>
+    </div>
+    <h2 class="text-center p-4 mt-3 mb-3">{{ company.c_name }}</h2>
+    <div class="card text-center p-4 mb-3">
+        <p><b>Registration:</b> {{ company.c_registration }}</p>
+        <p><b>Mobile:</b> {{ company.c_mobile_no }}</p>
+        <p><b>Email:</b> {{ company.c_email_id }}</p>
+    </div>
+    <div class="card text-center p-4 mb-3">
+        <h3>Authorized Person</h3>
+        {% if auth %}
+            <p>{{ auth.auth_p_name }} – {{ auth.auth_p_designation }}</p>
+            <p>{{ auth.auth_p_mobile_no }}</p>
+            {% if auth.auth_id %}
+                <a href="{{ auth.auth_id.url }}" target="_blank">View ID Proof</a>
+            {% else %}
+                <p class="text-danger">No ID uploaded</p>
+            {% endif %}
+            {% else %}
+            <p class="text-danger">Authorized person not submitted</p>
+        {% endif %}
+    </div>
+    <div class="card text-center p-4 mb-3">
+        <h3>Legal Info</h3>
+        {% if legal %}
+        <p>PAN: {{ legal.c_pan }}</p>
+        <p>GST: {{ legal.c_gst }}</p>
+        {% else %}
+        <p class="text-danger">Legal info not submitted</p>
+        {% endif %}
+    </div>
+    <div class="card text-center p-4 mb-3">
+        <h3>Services</h3>
+        {% for profile in company.work_profiles.all %}
+        <h6>{{ profile.c_year }}  years of experience in</h6>
+        <ul style="list-style: none;">
+            {% for service in profile.c_nature_service.all %}
+            <li>{{ service.category }}</li>
+            {% endfor %}
+        </ul>
+        {% if profile.c_wportfolio %}
+        <a href="{{ profile.c_wportfolio.url }}" target="_blank">
+            {{ profile.c_wportfolio.name|slice:"14:" }}
+        </a>
+        {% else %}
+        <p class="text-danger">No portfolio uploaded</p>
+        {% endif %}
+        {% empty %}
+        <p class="text-danger">No work Profile available</p>
+        {% endfor %}
+    </div>
+    <div class="card text-center p-4 mb-3">
+        <h3>Declaration</h3>
+        <p>{{ declaration.c_p_verification }}</p>
+        {% if declaration and declaration.c_noc %}
+            <a href="{{ declaration.c_noc.url }}" target="_blank">View NOC</a>
+        {% else %}
+            <p class="text-danger">No NOC uploaded</p>
+        {% endif %}
+    </div>
+    <div class="card text-center p-4 mb-3">
+        <h3>Insurance Details</h3>
+        {% if insurance %}
+        {% for ins in insurance %}
+        <p>Type: {{ ins.c_ins_type }}</p>
+        <p>Provider: {{ ins.c_ins_provider }}</p>
+        <p>Number: {{ ins.c_ins_number }}</p>
+        {% endfor %}
+        {% else %}
+        <p class="text-danger">Insurance details not submitted</p>
+        {% endif %}
+    </div>
+    <div class="card text-center p-4 mb-3">
+        <h3>Chief Technician Details</h3>
+        {% if chief_technician %}
+        <p>{{ chief_technician.c_chief_name }} - {{ chief_technician.c_chief_role }}</p>
+        <p>Experience: {{ chief_technician.c_chief_exp }} years</p>
+        <p>Contact: {{ chief_technician.c_chief_contact }}</p>
+        {% else %}
+        <p class="text-danger">Chief technician not submitted</p>
+        {% endif %}
+    </div>
+    
+    <div class="card text-center p-4 mb-3">
+        {% if company.approval_status != 'Approved'  %}
+        <form method="POST">
+            {% csrf_token %}
+            <button name="action" value="approve" class="btn btn-success">Approve</button>
+
+        </form>
+        <div>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal">Reject</button>
+        </div>
+        {% endif %}
+        <!--if type not given it submit bydefault-->
+
+        <!-- Reject Modal -->
+        <div class="modal fade" id="rejectModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title text-danger">Reject Company</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-muted">
+                                Please provide the reason for rejection.
+                                This message will be shown to the company.
+                            </p>
+                            <textarea name="rejection_reason" class="form-control" rows="4" placeholder="Enter rejection reason..." required></textarea>
+                            <!-- Hidden action -->
+                             <input type="hidden" name="action" value="reject">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-danger">Confirm Reject</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+{% endblock content %}

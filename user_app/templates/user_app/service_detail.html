@@ -1,0 +1,68 @@
+{% extends "user_app/base.html" %}
+{% block content %}
+<div class="container mt-4">
+
+    <div class="mb-4">
+        <h2 class="fw-bold text-primary">{{ service.h_services }}</h2>
+        <p class="text-muted">
+            Category: {{ service.s_category.category }}
+        </p>
+        <hr>
+    </div>
+
+    <h4 class="mb-3 text-primary">Services</h4>
+
+    {% if sub_services %}
+        <div class="row">
+            {% for sub in sub_services %}
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card shadow-sm h-100">
+
+                        <div class="card-body">
+                            <h6 class="card-title fw-semibold">
+                                {{ sub.name_of_service }}
+                            </h6>
+
+                            <p class="card-text text-muted small">
+                                {{ sub.description }}
+                            </p>
+
+                            <div class="fw-bold text-dark">
+                                ₹{{ sub.base_charge }}
+                            </div>
+                        </div>
+                        <form method="POST" action="{% url 'bookservices' sub.id %}">
+                        {% csrf_token %}
+                        <div class="card-footer bg-transparent border-0 text-end">
+                            <button type="submit" class="btn btn-outline-dark btn-sm">
+                                Book Now
+                            </button>
+                        </div>
+                        </form>
+
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted">No sub-services available.</p>
+    {% endif %}
+
+    <a href="{% url 'home' %}" class="btn btn-primary mt-3">
+        ← Back to Home
+    </a>
+
+</div>
+{% endblock content %}
+<h2>{{ service.h_services }}</h2>
+<p>Category: {{ service.s_category_id.category }}</p>
+
+<h4>Sub-services</h4>
+<ul>
+  {% for sub in sub_services %}
+    <li>{{ sub.name_of_service }} - {{ sub.base_charge }}</li>
+  {% empty %}
+    <li>No sub-services found.</li>
+  {% endfor %}
+</ul>

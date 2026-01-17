@@ -1,0 +1,45 @@
+{% extends "user_app/base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Allocated Services</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Service</th>
+            <th>Allocated On</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for booking in bookings %}
+        <tr>
+            <td>{{ booking.user.username }}</td>
+            <td>{{ booking.service.name_of_service }}</td>
+            <td>{{ booking.updated_at|date:"d M Y H:i" }}</td>
+            <td>
+                <span class="badge bg-primary">Allocated</span>
+            </td>
+            <td>
+                <form method="post"
+                      action="{% url 'company_mark_done' booking.id %}">
+                    {% csrf_token %}
+                    <button class="btn btn-success btn-sm">
+                        Mark Done
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No allocated services</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+{% endblock content %}

@@ -1,0 +1,92 @@
+{% extends "user_app/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container my-5">
+    <h1 class="fw-bold mb-2 text-primary">Relocation Services</h1>
+    <h4 class="text-muted mb-4">BY THE CREW</h4>
+    <p>
+        Thoughtfully designed relocation solutions that ensure every move is smooth, secure, and meticulously managed. 
+        Whether relocating a home or an entire workspace, our trained teams handle every detail with precision, care, and discretion. 
+        From packing to final placement, we deliver a seamless moving experience—allowing you to transition with confidence and ease.
+    </p>
+    
+    {% if user.profile.role != 'ADMIN' %}
+    <div class="mb-4">
+        <a class="btn btn-primary" href="{% url 'user_sub_services' %}">Click Here for Cleaning Services</a>
+    </div>
+    {% endif %}
+    <div class="row row-cols-1 g-4">
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/relocation1.png' %}" class="img-fluid" alt="Residential Relocation">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Residential Relocation</h3>
+                            <ul>
+                                <li>Professional Packing: High-quality materials for furniture, appliances, fragile items, and valuables</li>
+                                <li>Safe Loading & Transportation: Trained manpower with secure, GPS-enabled vehicles</li>
+                                <li>Unloading & Organized Unpacking: Room-wise placement as per your preference</li>
+                                <li>Furniture & Appliance Handling: Disassembly, reassembly, and alignment of beds, wardrobes, TVs, ACs, and appliances</li>
+                                <li>Move-In / Move-Out Support: Cleaning, minor fixes, and final walkthrough assistance</li>
+                            </ul>
+                            <p><strong>Ideal For:</strong> Local home shifting, apartment and villa relocations, tenant move-ins/move-outs, partial moves, and single-item shifting.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/relocation2.png' %}" class="img-fluid" alt="Commercial Relocation">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Commercial Relocation</h3>
+                            <ul>
+                                <li>Workspace Packing & Labeling: Systematic packing of office furniture, equipment, and documents</li>
+                                <li>IT & Equipment Handling: Secure handling of computers, servers, printers, and electronics</li>
+                                <li>Safe Transportation & Logistics: Planned loading, routing, and scheduled delivery</li>
+                                <li>Reinstallation & Setup Support: Workstation assembly, furniture placement, and basic setup</li>
+                                <li>Post-Move Coordination: Organized unpacking and debris removal</li>
+                            </ul>
+                            <p><strong>Ideal For:</strong> Office relocations, retail store shifting, clinics, studios & small businesses, internal office reorganization.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="mt-5">
+        <h3 class="text-primary">How It Works</h3>
+        <ul>
+            <li>Select Residential or Commercial Relocation</li>
+            <li>Share move details and preferred schedule</li>
+            <li>Receive a transparent estimate</li>
+            <li>Trained team arrives with materials and equipment</li>
+            <li>Safe transport and careful unloading</li>
+            <li>Final setup and service completion</li>
+        </ul>
+    </div>
+    
+    <div class="mt-5">
+        <h3 class="text-primary">Why Choose Our Relocation Services</h3>
+        <ul>
+            <li>Background-verified and trained professionals</li>
+            <li>Premium packing materials and handling tools</li>
+            <li>Clean, organized, and damage-prevention execution</li>
+            <li>Transparent pricing with no hidden charges</li>
+            <li>Optional insurance support</li>
+            <li>Dedicated coordination throughout the move</li>
+        </ul>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,132 @@
+{% extends "user_app/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container my-5">
+    <h1 class="fw-bold mb-2 text-primary">Appliance Repair Services</h1>
+    <h4 class="text-muted mb-4">BY THE CREW</h4>
+    <p>
+        Expert appliance care delivered with precision, hygiene, and reliability—ensuring your everyday comforts run flawlessly.
+        Services include:
+        Fridge Repair, Washing Machine, AC Service, Microwave Repair, Geyser Service, Chimney Cleaning
+    </p>
+    {% if user.profile.role != 'ADMIN' %}
+    <div class="mb-4">
+        <a class="btn btn-primary" href="{% url 'user_sub_services' %}">Click Here for Cleaning Services</a>
+    </div>
+    {% endif %}
+    <div class="row row-cols-1 g-4">
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/app_rep1.png' %}" class="img-fluid" alt="Home Appliance Repairs">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Home Appliance Repairs</h3>
+                            <ul>
+                                <li>Refrigerator repair & maintenance</li>
+                                <li>Washing machine repair (front-load & top-load)</li>
+                                <li>Microwave oven repair (solo, grill & convection)</li>
+                                <li>Air conditioner service & repair</li>
+                                <li>Dishwasher repair & installation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/app_rep4.png' %}" class="img-fluid" alt="Installation & Setup">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Installation & Setup</h3>
+                            <ul>
+                                <li>New appliance installation & unboxing</li>
+                                <li>Built-in & modular appliance fitting</li>
+                                <li>Power & water connection setup</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/app_rep3.png' %}" class="img-fluid" alt="Diagnosis & Maintenance">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Diagnosis & Maintenance</h3>
+                            <ul>
+                                <li>Performance diagnostics & fault detection</li>
+                                <li>Preventive servicing & tune-ups</li>
+                                <li>Annual appliance maintenance plans</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/home15.png' %}" class="img-fluid" alt="Heating & Cooling Appliances">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Heating & Cooling Appliances</h3>
+                            <ul>
+                                <li>Geyser repair & servicing</li>
+                                <li>Air cooler repair</li>
+                                <li>Chimney & hob servicing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="{% static 'user_app/images/app_rep2.png' %}" class="img-fluid" alt="Commercial Appliance Support">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Commercial Appliance Support</h3>
+                            <ul>
+                                <li>Office & retail appliance maintenance</li>
+                                <li>Pantry & kitchen equipment repair</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-5">
+        <h3 class="text-primary">Why Choose Our Appliance Repair Services</h3>
+        <ul>
+            <li>Certified & background-verified technicians</li>
+            <li>Genuine spare parts & advanced tools</li>
+            <li>Clean, careful & damage-free service</li>
+            <li>Transparent pricing with service warranty</li>
+        </ul>
+    </div>
+</div>
+
+
+{% endblock content %}

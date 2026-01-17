@@ -1,0 +1,46 @@
+{% extends "user_app/base.html" %}
+{% block content %}
+<div class="container">
+    <div class="mb-0 mt-3">
+        <a class="btn btn-dark mt-3" href="{% url 'service_categories' %}" style="margin-left:40px;">Back</a>
+        <h3 class="text-center my-3">Category List</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <table class="table table-striped align-middle text-center">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for category in categories %}
+                <tr>
+                    <td>{{ category.category }}</td>
+                    <td>
+                        <form method='POST' action="{% url 'delete_category'  category.id %}" class="d-inline">
+                        {% csrf_token %}
+                            <button class="btn btn-danger btn-sm"
+                            onclick="return confirm('are you sure want to delete this category?');">delete</button>
+                        </form>
+                    </td>
+                </tr>
+            
+   
+                {% empty %}
+                <tr>
+                    <td>
+                    No categories available
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="d-flex gap-3">
+                <a class="btn btn-warning mx-auto" href="{% url 'add_category' %}">add category</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

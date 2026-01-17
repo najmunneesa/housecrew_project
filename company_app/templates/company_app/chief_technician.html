@@ -1,0 +1,73 @@
+{% extends "user_app/base.html" %}
+{% block content %}
+
+{% include "company_app/partials/registration.html" %}
+<div class="container">
+    <div class="col-md-6 mx-auto">
+        <div class="card shadow-sm p-4">
+
+            <h3 class="text-center mb-4">Chief Technician Details</h3>
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger text-center">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                {% for field in form %}
+                    <div class="mb-3">
+                        {{ field.label_tag }}
+
+                        {{ field }}
+
+                        {% if field.help_text %}
+                            <div class="form-text">
+                                {{ field.help_text }}
+                            </div>
+                        {% endif %}
+
+                        {% for error in field.errors %}
+                            <div class="text-danger small">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+
+                <div class="text-center mt-4">
+                    <button
+                        type="submit"
+                        name="action"
+                        value="save"
+                        class="btn btn-warning px-4 me-2">
+                        SAVE
+                    </button>
+
+                    <button
+                        type="submit"
+                        name="action"
+                        value="submit"
+                        class="btn btn-success px-4">
+                        SAVE &amp; SUBMIT
+                    </button>
+                </div>
+            </form>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} mt-3 text-center">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
