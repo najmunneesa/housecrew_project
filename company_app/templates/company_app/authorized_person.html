@@ -31,14 +31,16 @@
                 </button>
             </div>
         </form>
-        {% if request.session.authorized_person.auth_id_path %}
-        <div class="mt-3">
-            <p>Previously uploaded ID:
-                <a href="{{ MEDIA_URL }}{{ request.session.authorized_person.auth_id_path }}">
+        {% if request.session.authorized_person %}
+            {% if request.session.authorized_person.auth_id_path %}
+            <div class="mt-3">
+                <p>Previously uploaded ID:
+                    <a href="{{ MEDIA_URL }}{{ request.session.authorized_person.auth_id_path }}">
                     View filesizeformat
-                </a>
-            </p>
-        </div>
+                    </a>
+                    </p>
+            </div>
+            {% endif %}
         {% endif %}
     </div>
 </div>

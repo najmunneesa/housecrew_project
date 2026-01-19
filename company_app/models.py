@@ -30,9 +30,9 @@ adhaar_validator= RegexValidator(
 )
 class S_Company(models.Model):
     APPROVAL_STATUS = [
-        ('PENDING' , 'Pending'),
-        ('APPROVED' , 'Approved'),
-        ('REJECTED', 'Rejected')
+        ('Pending' , 'Pending'),
+        ('Approved' , 'Approved'),
+        ('Rejected', 'Rejected')
     ]
     c_name=models.CharField(max_length=100, unique=True, 
                             verbose_name="Company Name",
@@ -42,7 +42,7 @@ class S_Company(models.Model):
     c_email_id=models.EmailField(unique=True, validators=[email_validator])
     c_service_location=models.ManyToManyField(Location, related_name='companies')
     
-    approval_status = models.CharField(max_length=15, choices=APPROVAL_STATUS, default='PENDING')
+    approval_status = models.CharField(max_length=15, choices=APPROVAL_STATUS, default='Pending')
     
     is_active = models.BooleanField(default=False)
     

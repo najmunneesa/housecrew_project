@@ -248,7 +248,7 @@ def bookservices(request, service_id):
         work_profile= C_profile_work.objects.filter(c_nature_service=service.category).first()
         
         if not work_profile:
-            messages.info(request, "No SErvice is available.")
+            messages.info(request, "No Service is available.")
             return redirect('dashboard')
         
         crew =HouseCrew.objects.filter(s_category=service.category).first()
@@ -257,11 +257,12 @@ def bookservices(request, service_id):
             messages.info(request,"No Company available")
             return redirect('dashboard')
         
-        Booking.objects.create(user=user, service=service,crew= crew, company=work_profile.company, status='PENDING')
+        Booking.objects.create(user=user, service=service,crew= crew, company=work_profile.company, status='pending')
         return redirect('dashboard')
     
     return render(request, 'user_app/book_services.html', {'service' : service})
 
+@login_required
 def emergency_services(request):
     services= AddServices.objects.filter(is_emergency=True)
     
@@ -285,29 +286,54 @@ def book_emergency_services(request, service_id):
             messages.info(request,"No Company available")
             return redirect('dashboard')
         
-        Booking.objects.create(user=user, service=service,crew= crew, company=work_profile.company, status='PENDING', is_emergency=is_emergency)
+        Booking.objects.create(user=user, service=service,crew= crew, company=work_profile.company, status='pending', is_emergency=is_emergency)
         return redirect('dashboard')
     
     return render(request, 'user_app/book_emergency_service.html', {'service' : service, 'is_emergency':is_emergency})
 
+
 def get_quote(request):
     services = AddServices.objects.all()
     locations = Location.objects.all()
-    quote=0
-    
-    if request.method== 'POST':
-        service_id= request.POST.get('service')
-        location_id = request.POST.get('location')
-        
-        service = AddServices.objects.get(id=service_id)
-        location =Location.objects.get(id=location_id)
-        
-        quote = quote + service.base_charge
-        
-    context= {
-        'services' :services,
-        'locations' :locations,
-        'quote' : quote
+    quote = None
+    selected_service = None
+    selected_location = None
+    is_emergency = False
+
+    if request.method == "POST":
+        service_id = request.POST.get("service")
+        location_id = request.POST.get("location")
+        is_emergency = bool(request.POST.get("is_emergency"))
+
+        if service_id and location_id:
+            service = get_object_or_404(AddServices, id=service_id)
+            location = get_object_or_404(Location, id=location_id)
+            selected_service = service.id
+            selected_location = location.id
+            quote = service.base_charge + location.extra_charge
+            if is_emergency:
+                quote *= 1.5
+
+    context = {
+        "services": services,
+        "locations": locations,
+        "quote": quote,
+        "selected_service": selected_service,
+        "selected_location": selected_location,
+        "is_emergency": is_emergency,
     }
-    
-    return render(render, 'user_app/get_quote.html', {'context' : context})
+    return render(request, "quote_form.html", context)
+
+def cancel_service(request, id):
+    booking = get_object_or_404(Booking, id=id)
+
+    if booking.status != 'cancelled':
+        booking.status = 'cancelled'
+        booking.delete()
+        messages.info(request, "The service has been cancelled from your request list.")
+        
+    else:
+        messages.info(request, "This service is already cancelled.")
+
+    return redirect('dashboard')
+

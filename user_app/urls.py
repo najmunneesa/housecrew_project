@@ -45,6 +45,7 @@ urlpatterns = [
     path('installation/',views.installation_services,name='installation'),
     path('relocation/',views.relocation,name='relocation'),
     path('additional/',views.additional,name='additional'),
+    path('cancel_service/<int:id>/',views.cancel_service,name='cancel_service'),
     #house crew
     path('house_crew/',views.house_crew,name='house crew'),
      #companies

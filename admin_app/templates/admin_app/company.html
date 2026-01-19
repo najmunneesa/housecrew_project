@@ -49,7 +49,9 @@
             
             {% for company in companies %}
             <div>
+                {% if company.approval_status == 'Approved' %}
                 <li><a class="btn mb-3" href="{% url 'verify_company' company.id%}">{{ company.c_name }}</a></li><br>
+                {% endif %}
             </div>
             
             {% empty %}

@@ -85,46 +85,46 @@
         {% endif %}
     </div>
     
+    {% if company.approval_status != 'Approved' %}
     <div class="card text-center p-4 mb-3">
-        {% if company.approval_status != 'Approved'  %}
-        <form method="POST">
-            {% csrf_token %}
-            <button name="action" value="approve" class="btn btn-success">Approve</button>
+    <form method="POST" class="mb-3">
+        {% csrf_token %}
+        <button type="submit" name="action" value="approved"
+                class="btn btn-success w-100"
+                onclick="return confirm('Are you sure you want to approve this company?')">
+            Approve
+        </button>
+    </form>
+    <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#rejectModal">
+        Reject
+    </button>
 
-        </form>
-        <div>
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal">Reject</button>
-        </div>
-        {% endif %}
-        <!--if type not given it submit bydefault-->
-
-        <!-- Reject Modal -->
-        <div class="modal fade" id="rejectModal" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <form method="POST">
-                        {% csrf_token %}
-                        <div class="modal-header">
-                            <h5 class="modal-title text-danger">Reject Company</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p class="text-muted">
-                                Please provide the reason for rejection.
-                                This message will be shown to the company.
-                            </p>
-                            <textarea name="rejection_reason" class="form-control" rows="4" placeholder="Enter rejection reason..." required></textarea>
-                            <!-- Hidden action -->
-                             <input type="hidden" name="action" value="reject">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-danger">Confirm Reject</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-    </div>
 </div>
+
+<!--modal-->
+<div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="POST">
+        {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title" id="rejectModalLabel">Reject Company</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="rejection_reason" class="form-label">Rejection Reason</label>
+            <textarea name="rejection_reason" id="rejection_reason" class="form-control" required></textarea>
+          </div>
+          <input type="hidden" name="action" value="rejected">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-danger">Submit Rejection</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endif %}
 {% endblock content %}

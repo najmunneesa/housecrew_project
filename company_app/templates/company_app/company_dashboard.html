@@ -6,15 +6,21 @@
             <h3 class="mb-1 text-primary">{{ company.user.username }}</h3>
             <p class="text-muted mb-2">{{ company.c_name }}</p>
 
-            {% if company.approval_status == "APPROVED" %}
+            {% if company.approval_status == "Approved" %}
                 <span class="badge bg-success">Approved</span>
-            {% elif company.approval_status == "PENDING" %}
+            {% elif company.approval_status == "Pending" %}
                 <span class="badge bg-warning text-dark">Pending Approval</span>
             {% else %}
                 <span class="badge bg-danger">Rejected</span>
+                <div class="d-flex justify-content-end mb-3">
+                    <a href="{% url 'register_company' %}" class="btn btn-outline-primary">
+                        Resubmit Request
+                    </a>
+                </div>
+
             {% endif %}
         </div>
-        {% if company.approval_status == "APPROVED" %}
+        {% if company.approval_status == "Approved" %}
         <div class="d-flex justify-content-end mb-3">
             <a href="{% url 'update_credentials' %}" class="btn btn-outline-primary">
                 Update Login Credentials

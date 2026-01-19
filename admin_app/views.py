@@ -140,44 +140,55 @@ def company(request):
     return render(request,'admin_app/company.html')
 
 def company_requests(request):
-    company_requests= S_Company.objects.filter(approval_status = 'PENDING')
+    company_requests= S_Company.objects.filter(approval_status = 'Pending')
     companies=S_Company.objects.all()
     return render(request,'admin_app/company.html', {'requests' : company_requests, 'companies' : companies})
 
 def verify_company(request, company_id):
-    company= get_object_or_404(S_Company, id=company_id)
-    user =company.user
-    
-    if request.method== 'POST':
-        action= request.POST.get('action')
-        reason= request.POST.get('rejection_reason')
-        
+    company = get_object_or_404(S_Company, id=company_id)
+    user = company.user
+
+    if request.method == 'POST':
+        action = request.POST.get('action', '').lower()
+        reason = request.POST.get('rejection_reason', '')
+
         with transaction.atomic():
-            if action== 'approved':
-                company.approval_status='APPROVED'
-                company.is_active= True
+            if action == 'approved':
+                company.approval_status = 'Approved'
+                company.is_active = True
                 company.save()
-                
+
                 if user:
                     if hasattr(user, 'profile'):
                         user.profile.role = 'COMPANY'
                         user.profile.save()
-                    #user.is_staff = True
+                    user.is_staff=True
                     user.is_active = True
                     user.save()
-                    
-                messages.success(request, 'company approved')
-                
-            elif action== 'rejected':
-                company.approval_status= 'REJECTED'
-                company.is_active=False
+
+                messages.success(request, 'Company approved successfully!')
+
+            elif action == 'rejected':
+                if not reason:
+                    messages.error(request, "Please provide a rejection reason.")
+                    return redirect('verify_company', company_id=company.id)
+
+                company.approval_status = 'Rejected'
+                company.is_active = False
                 company.rejection_reason = reason
-                company.can_resubmit= True
+                company.can_resubmit = True
                 company.save()
-                messages.warning(request, "the company rejected.")
-            
-        
+
+                messages.warning(request, "Company rejected.")
+
+            else:
+                messages.error(request, "Invalid action.")
+                return redirect('verify_company', company_id=company.id)
+
         return redirect('company_requests')
+
+    return render(request, 'admin_app/verify_company.html', {'company': company})
+
     
     context= {
         'company' : company,
@@ -196,7 +207,7 @@ def monitor_services(request):
 
     context = {
         'total_bookings': bookings.count(),
-        'pending_count': bookings.filter(status='pending').count(),
+        'pending_count': bookings.filter(status ='pending').count(),
         'allocated_count': bookings.filter(status='allocated').count(),
         'completed_count': bookings.filter(status='completed').count(),
         'emergency_count': bookings.filter(is_emergency=True).count(),

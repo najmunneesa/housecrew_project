@@ -30,7 +30,8 @@ class Booking(models.Model):
         ('pending' , 'pending'),
         ('allocated', 'allocated'),
         ('completed' , 'completed'),
-        ('rejected' , 'rejected')
+        ('rejected' , 'rejected'),
+        ('cancelled' , 'cancelled')
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     service = models.ForeignKey(AddServices, on_delete=models.CASCADE)
@@ -39,7 +40,7 @@ class Booking(models.Model):
     is_emergency=models.BooleanField(default=False)
     is_available= models.BooleanField(default=True)
     crew=models.ForeignKey(HouseCrew, on_delete=models.CASCADE, null=True, blank=True)
-    status = models.CharField(max_length=15, choices=STATUS_CHOICES ,default='PENDING')
+    status = models.CharField(max_length=15, choices=STATUS_CHOICES ,default='pending')
     
     def __str__(self):
         return f"{self.user.username} - {self.crew.h_services} - {self.company}"

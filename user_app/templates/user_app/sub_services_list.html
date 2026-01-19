@@ -19,15 +19,27 @@
 
                         <p class="fw-bold text-dark mb-0">₹{{ sub.base_charge }}</p>
                     </div>
+                    <div class="card-footer bg-transparent border-0 text-end">
+                        <form method="post" action="{% url 'bookservices' sub.id %}" class="book-service-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="sub_id" value="{{ sub.id }}">
+                            <button type="submit" class="btn btn-danger w-100">Book Service</button>
+                        </form>
+                    </div>
+                    
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const forms = document.querySelectorAll('.book-service-form');
+                            forms.forEach(function(form) {
+                                form.addEventListener('submit', function(e) {
+                                    if (!confirm("Are you sure you want to book this service?")) {
+                                        e.preventDefault();
+                                        }
+                                    });
+                                });
+                            });
+                    </script>
 
-                    <form method="POST" action="{% url 'bookservices' sub.id %}">
-                        {% csrf_token %}
-                        <div class="card-footer bg-transparent border-0 text-end">
-                            <button type="submit" class="btn btn-outline-dark btn-sm">
-                                Book Now
-                            </button>
-                        </div>
-                    </form>
                 </div>
             </div>
         {% empty %}

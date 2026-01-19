@@ -50,8 +50,8 @@ def register_company(request):
     if request.user.is_authenticated:
         try:
             company = request.user.company_profile
-            if company.approval_status == 'REJECTED':
-                company.approval_status = 'PENDING'
+            if company.approval_status == 'Rejected':
+                company.approval_status = 'Pending'
                 company.rejection_reason = ''
                 company.save()
         except:
@@ -98,7 +98,7 @@ def authorized_person(request):
         return redirect('company_profile')
     
     saved_data= request.session.get('authorized_person', {})
-    initial_file_path = saved_data.get('auth_id_path')
+    initial_file_path = saved_data.get('auth_id_path', None)
     
     if request.method== 'POST':
         form= Authorized_person_form(request.POST, request.FILES)
@@ -440,17 +440,17 @@ def company_login(request):
             return redirect('company_login')
         
         #pending
-        if company.approval_status == 'PENDING':
+        if company.approval_status == 'Pending':
             messages.warning(request, "Your request is under review. Please wait for the approval")
             return redirect('register_company')
         
         #rejected
-        if company.approval_status == 'REJECTED':
+        if company.approval_status == 'Rejected':
             messages.warning(request, "Your registration rejected. please submit with sufficient data")
             return redirect('register_company')
         
         #approved
-        if company.approval_status == 'APPROVED':
+        if company.approval_status == 'Approved':
             return redirect('company_dashboard')
     
     return render(request, 'company_app/company_login.html')
@@ -507,7 +507,7 @@ def service_booking_requests(request):
     
     bookings = Booking.objects.filter(company=company, status='pending' ,).order_by('-booked_at')
     
-    return render(request, 'company_app/company_dashboard.html', {'bookings' : bookings})
+    return render(request, 'company_app/service_booking_requests.html', {'bookings' : bookings})
 
 def service_booking_update(request, user):
     company = get_object_or_404(S_Company, user=request.user)

@@ -47,8 +47,16 @@
                     <form method="post" action="{% url 'book_emergency_services' service.id %}">
                         {% csrf_token %}
                         <input type="hidden" name="service_id" value="{{ service.id }}">
-                        <button type="submit" class="btn btn-danger w-100">Book Service</button>
+                        <button type="submit" class="btn btn-danger w-100" onclick="return confirmBooking()">Book Service</button>
                     </form>
+                    
+                    <script>
+                        function confirmBooking() {
+                            return confirm("Are you sure you want to book this service?");
+                        }
+                    </script>
+
+
                 </div>
             </div>
             {% empty %}

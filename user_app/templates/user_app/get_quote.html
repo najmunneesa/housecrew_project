@@ -1,47 +1,23 @@
 {% extends "user_app/base.html" %}
 {% block content %}
-<div class="container">
-    <form method="post">
-    {% csrf_token %}
+<select name="service" class="form-control" required>
+    <option value="">-- Choose Service --</option>
+    {% for s in services %}
+        <option value="{{ s.id }}" {% if s.id == selected_service %}selected{% endif %}>
+            {{ s.name_of_service }} (₹{{ s.base_charge }})
+        </option>
+    {% endfor %}
+</select>
 
-    <div class="mb-3">
-        <label>Select Service</label>
-        <select name="service" class="form-control" required>
-            <option value="">-- Choose Service --</option>
-            {% for s in services %}
-                <option value="{{ s.id }}">
-                    {{ s.name_of_service }} (₹{{ s.base_charge }})
-                </option>
-            {% endfor %}
-        </select>
-    </div>
+<select name="location" class="form-control" required>
+    <option value="">-- Choose Location --</option>
+    {% for l in locations %}
+        <option value="{{ l.id }}" {% if l.id == selected_location %}selected{% endif %}>
+            {{ l.name }} (+₹{{ l.extra_charge }})
+        </option>
+    {% endfor %}
+</select>
 
-    <div class="mb-3">
-        <label>Select Location</label>
-        <select name="location" class="form-control" required>
-            <option value="">-- Choose Location --</option>
-            {% for l in locations %}
-                <option value="{{ l.id }}">
-                    {{ l.name }} (+₹{{ l.extra_charge }})
-                </option>
-            {% endfor %}
-        </select>
-    </div>
+<input type="checkbox" name="is_emergency" class="form-check-input" {% if is_emergency %}checked{% endif %}>
 
-    <div class="form-check mb-3">
-        <input type="checkbox" name="is_emergency" class="form-check-input">
-        <label class="form-check-label">Emergency Service</label>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Get Quote</button>
-</form>
-
-{% if quote %}
-    <div class="alert alert-success mt-4">
-        <h4>Estimated Charge: ₹{{ quote }}</h4>
-        <small>*Final price may vary after inspection</small>
-    </div>
-{% endif %}
-
-</div>
 {% endblock content %}
